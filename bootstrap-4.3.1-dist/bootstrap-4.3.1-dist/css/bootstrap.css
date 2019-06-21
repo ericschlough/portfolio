@@ -2694,15 +2694,83 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
 }
 
-.btn-outline-Eric1 {
+.btn-outline-Eric3 {
+  color: #FF533D;
+  font-weight: bold;
+  border-color: rgb(0, 0, 0, 0);
+}
+
+.btn-outline-Eric3:hover {
   color: #F5F5F5;
+  border-color: #F5F5F5;
+  font-weight: bold;
+}
+
+.btn-outline-Eric3:focus, .btn-outline-Eric3.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-outline-Eric3.disabled, .btn-outline-Eric3:disabled {
+  color: #007bff;
+  background-color: transparent;
+}
+
+.btn-outline-Eric3:not(:disabled):not(.disabled):active, .btn-outline-Eric3:not(:disabled):not(.disabled).active,
+.show > .btn-outline-Eric3.dropdown-toggle {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-Eric3:not(:disabled):not(.disabled):active:focus, .btn-outline-Eric3:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-Eric3.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+
+.btn-outline-Eric2 {
+  color: #F7B733;
+  font-weight: bold;
+  border-color: rgb(0, 0, 0, 0);
+}
+
+.btn-outline-Eric2:hover {
+  color: #F5F5F5;
+  border-color: #F5F5F5;
+  font-weight: bold;
+}
+
+.btn-outline-Eric2:focus, .btn-outline-Eric2.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-outline-Eric2.disabled, .btn-outline-Eric2:disabled {
+  color: #007bff;
+  background-color: transparent;
+}
+
+.btn-outline-Eric2:not(:disabled):not(.disabled):active, .btn-outline-Eric2:not(:disabled):not(.disabled).active,
+.show > .btn-outline-Eric2.dropdown-toggle {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-Eric2:not(:disabled):not(.disabled):active:focus, .btn-outline-Eric2:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-Eric2.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+
+.btn-outline-Eric1 {
+  color: #0b6623;
   font-weight: bold;
   border-color: rgb(0, 0, 0, 0);
 }
 
 .btn-outline-Eric1:hover {
-  color: #77C9D4;
-  border-color: #AB987A;
+  color: #F5F5F5;
+  border-color: #F5F5F5;
   font-weight: bold;
 }
 
@@ -5178,7 +5246,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .jumbotron3 {
-  padding: 33.5% 4rem;
+  padding: 10% 4rem;
   background-image: url(http://wallpapers.ae/wp-content/uploads/2017/12/IMG_5394.jpg);
   background-attachment: fixed;
   background-position: center;
