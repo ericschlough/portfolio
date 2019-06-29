@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="C:\Users\ES071079\Desktop\EricGit\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
 
     <title>Eric Schlough</title>
     <style>
@@ -47,25 +47,18 @@
 
 	<div class="jumbotron3 text-center" style="margin-bottom:0">
 		<div class="container"> 
-			<h2 class="text-center" style="color:#EBE5D9; font-weight:bold; margin-bottom: 30px;"> Self and Class Projects</h2>
+			<h2 class="text-center" style="color:#EBE5D9; font-weight:bold; margin-bottom: 30px; background-color: #6BBAA7; border-radius: .4rem; margin-right: 55px; margin-left: 55px;"> Self and Class Projects</h2>
 		</div>	
 		<div class="container"> 
-			<h4 class="text-center" style="color:#EBE5D9; font-weight:bold; margin-bottom: 10px;"> Automated Snake Game Below: (Play to start, Stop to pause, Reset to start over)</h4>
+			<h4 class="text-center" style="color:#EBE5D9; font-weight:bold; margin-bottom: 10px; background-color: #6BBAA7; border-radius: .4rem; margin-right: 55px; margin-left: 55px;"> Automated Snake Game Below: (Play to start, Stop to pause, Reset to start over)</h4>
 		</div>
 		<div id="buttons">
 			<div class="container" style="margin-top:10px;"> 
 				<div class="row">
 					<div class="container justify-content-center">
-						<button onclick="play()" type="button" class="btn btn-lg btn-block btn-outline-Eric1">Play</button>
-					</div>
-					<div class="container justify-content-start">
-						<button onclick="reset()" type="button" class="btn btn-lg btn-block btn-outline-Eric2">Reset</button>
-					</div>
-					<div class="container justify-content-start">
-						<button onclick="paused()" type="button" class="btn btn-lg btn-block btn-outline-Eric3">Stop</button>
-					</div>
-					<div class="col-sm-4 justify-content-center">
-					   	
+						<button onclick="play()" type="button" class="btn btn-lg btn-outline-Eric1">Play</button>
+						<button onclick="reset()" type="button" class="btn btn-lg btn-outline-Eric2">Reset</button>
+						<button onclick="paused()" type="button" class="btn btn-lg btn-outline-Eric3">Stop</button>
 					</div>
 				</div>
 			</div>
@@ -90,129 +83,109 @@
 								KEY_SPACE = 32,
 								
 								//Game Vars
-								canvas,  //HTMLCanvas
-								ctx,  //CanvasRenderingContext2d 
-								keystate, //keyboard inputs
+								canvas,  //HTML Canvas
+								ctx,  //Canvas Rendering Context 
 								frames,   //number for animation 
 								score,
 								start_box,
+								keystate,
 								pause,
 								playing,  
 								gameover;
-								/**
-								 * Grid datastructor, usefull in games where the game world is
-								 * confined in absolute sized chunks of data or information.
-								 */
+								
+								//used for block placement
 								grid = {
 									width: null,  /* number, the number of columns */
 									height: null, /* number, the number of rows */
-									_grid: null,  /* Array<any>, data representation */
-									/**
-									* Initiate and fill a c x r grid with the value of d
-									*/
+									board: null,  /* Array<any>, data representation */
+									
+									//fills the grid (0->c && 0->r with d)
 									init: function(d, c, r) {
 										this.width = c;
 										this.height = r;
-										this._grid = [];
+										this.board = [];
 										for (var x=0; x < c; x++) {
-											this._grid.push([]);
+											this.board.push([]);
 											for (var y=0; y < r; y++) {
-												this._grid[x].push(d);
+												this.board[x].push(d);
 											}
 										}
 									},
-									/**
-									* Set the value of the grid cell at (x, y)
-									*/
+
+									//sets value of grid to specified field
 									set: function(val, x, y) {
-										this._grid[x][y] = val;
+										this.board[x][y] = val;
 									},
-									/**
-									* Get the value of the cell at (x, y)
-									*/
+									
+									//returns specified value of grid
 									get: function(x, y) {
-										return this._grid[x][y];
+										return this.board[x][y];
 									}
 								}
-								/**
-								 * The snake, works as a queue (FIFO, first in first out) of data
-								 * with all the current positions in the grid with the snake id
-								 */
+								
+								//snake is a FIFO queue 
 								snake = {
-									direction: null, /* number, the direction */
+									direction: null, 
 									head: null, 
-									_queue: null, /* Array<number>, data representation*/
+									list: null, /* Array<number>*/
 									/**
-									* Clears the queue and sets the start position and direction
+									* Clears queue and sets position and direction
 									*/
 									init: function(d, x, y) {
 										this.direction = d;
-										this._queue = [];
+										this.list = [];
 										this.insert(x, y);
 									},
-									/**
-									* Adds an element to the queue
-									*/
+									
 									insert: function(x, y) {
 										// unshift prepends an element to an array
-										this._queue.unshift({x:x, y:y});
-										this.head = this._queue[0];
+										this.list.unshift({x:x, y:y});
+										this.head = this.list[0];
 									},
 									/**
 									* Removes and returns the first element in the queue.
-									*
-									* @return {Object} the first element
 									*/
 									remove: function() {
-									// pop returns the last element of an array
-										return this._queue.pop();
+										return this.list.pop();
 									}
 								};
 
 
 
 								/**
-								 * The fruit moves. it works as a queue (FIFO, first in first out, does not grow in length. queue of length 1 always) of data
+								 * The fruit moves randomly and based on the snakes current position. it works as a queue (FIFO, first in first out, does not grow in length. queue of length 1 always) of data
 								 * 
 								 */
 								fruits = {
-									direction: null, /* number, the direction */
+									direction: null,
 									head: null, 
-									_queue: null, /* Array<number>, data representation*/
+									list: null, /* Array<number>*/
 									/**
-									* Clears the queue and sets the start position and direction
+									* Clears queue and sets position and direction
 									*/
 									init: function(d, x, y) {
 										this.direction = d;
-										this._queue = [];
+										this.list = [];
 										this.insert(x, y);
 									},
-									/**
-									* Adds an element to the queue
-									*/
+									
 									insert: function(x, y) {
 										// unshift prepends an element to an array
-										this._queue.unshift({x:x, y:y});
-										this.head = this._queue[0];
+										this.list.unshift({x:x, y:y});
+										this.head = this.list[0];
 									},
-									/**
-									* Removes and returns the first element in the queue.
-									*
-									* @return {Object} the first element
-									*/
 									remove: function() {
-									// pop returns the last element of an array
-										return this._queue.pop();
+										return this.list.pop();
 									}
 								};
 
 
 								/**
-								 * Set a food id at a random free cell in the grid
+								 * place a food id at a random free cell in the grid
 								 */
 								function setFood() {
 									var empty = [];
-									// iterate through the grid and find all empty cells
+									// find all empty cells
 									for (var x=0; x < grid.width; x++) {
 										for (var y=0; y < grid.height; y++) {
 											if (grid.get(x, y) === EMPTY) {
@@ -487,96 +460,6 @@
 
 										var newDir;
 
-										// // changing direction of the snake depending on which keys
-										// // that are pressed
-										// if (newDir === KEY_LEFT && snake.direction !== RIGHT) {
-										// 	console.log("Direction = LEFT");
-										// 	snake.direction = LEFT;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = UP;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = DOWN;
-										// 	} else {
-										// 		fruits.direction = LEFT;
-										// 	}
-										// } else {
-										// 	console.log("Direction = DOWN 2");
-										// 	snake.direction = DOWN;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = UP;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = DOWN;
-										// 	} else {
-										// 		fruits.direction = LEFT;
-										// 	}
-										// } 
-										
-										// if (newDir === KEY_UP && snake.direction !== DOWN) {
-										// 	console.log("Direction = UP");
-										// 	snake.direction = UP;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = RIGHT;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = LEFT;
-										// 	} else {
-										// 		fruits.direction = UP;
-										// 	}
-										// } else {
-										// 	console.log("Direction = RIGHT 2");
-										// 	snake.direction = RIGHT;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = UP;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = DOWN;
-										// 	} else {
-										// 		fruits.direction = LEFT;
-										// 	}
-										// } 
-
-										// if (newDir === KEY_RIGHT && snake.direction !== LEFT) {
-										// 	console.log("Direction = RIGHT");
-										// 	snake.direction = RIGHT;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = UP;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = DOWN;
-										// 	} else {
-										// 		fruits.direction = RIGHT;
-										// 	}
-										// } else {
-										// 	console.log("Direction = DOWN 3");
-										// 	snake.direction = DOWN;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = UP;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = DOWN;
-										// 	} else {
-										// 		fruits.direction = LEFT;
-										// 	}
-										// }
-
-										// if (newDir === KEY_DOWN && snake.direction !== UP) {
-										// 	console.log("Direction = DOWN");
-										// 	snake.direction = DOWN;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = RIGHT;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = DOWN;
-										// 	} else {
-										// 		fruits.direction = LEFT;
-										// 	}
-										// } else {
-										// 	console.log("Direction = LEFT 2");
-										// 	snake.direction = LEFT;
-										// 	if(randpos%3 === 0) { 
-										// 		fruits.direction = UP;
-										// 	} else if(randpos%3 === 1) {
-										// 		fruits.direction = DOWN;
-										// 	} else {
-										// 		fruits.direction = LEFT;
-										// 	}
-										// }
-
 										if(keystate[KEY_SPACE]) {
 											
 											paused();
@@ -770,19 +653,20 @@
 								function draw() {
 									// calculate tile-width and -height
 									var image = new Image(); 
-									image.src = "https://images-na.ssl-images-amazon.com/images/I/814hgyKloyL._SL1396_.jpg";
+									image.src = "https://stmed.net/sites/default/files/simple-wallpapers-25302-1663993.jpg";
 									var tw = canvas.width/grid.width;
 									var th = canvas.height/grid.height;
+									var w=0;
+									var z=0;
 									// iterate through the grid and draw all cells
 									for (var x=0; x < grid.width; x++) {
+
 										for (var y=0; y < grid.height; y++) {
 											// sets the fillstyle depending on the id of
 											// each cell
 											switch (grid.get(x, y)) {
 											case EMPTY:
-												ctx.fillStyle = "rgba(0, 0, 0, 0)";
-												ctx.fillRect(x*tw, y*th, tw, th);
-												ctx.drawImage(image, x*20, y*38, 20, 38, x*tw, y*th, tw, th)
+												ctx.drawImage(image, (x + 13.1)*(tw+5.25), y*th, tw+5.25, th, x*tw, y*th, tw, th)
 												break;
 											case SNAKE:
 												ctx.fillStyle = "#EBE5D9";
@@ -796,12 +680,13 @@
 												ctx.fillRect(x*tw, y*th, tw, th);
 												break;
 											}
-											
+											z++;
 										}
+										w++;
 									}
 									// changes the fillstyle once more and draws the score
 									// message to the canvas
-									ctx.fillStyle = "#F5F5F5";
+									ctx.fillStyle = "#0b6623";
 									ctx.fillText("SCORE: " + score, 10, canvas.height-10);
 								}
 
