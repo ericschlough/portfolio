@@ -159,10 +159,11 @@ a {
   color: #F5F5F5;
   text-decoration: none;
   background-color: transparent;
+  -webkit-transition: ;
 }
 
 a:hover {
-  color: #77C9D4;
+  color: #dda0dd;
 }
 
 
@@ -2694,6 +2695,8 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
 }
 
+
+
 .btn-outline-Eric3 {
   color: #FF533D;
   font-weight: bold;
@@ -2763,14 +2766,15 @@ fieldset:disabled a.btn {
 
 
 .btn-outline-Eric1 {
-  color: #0b6623;
+  color: #F5F5F5;
   font-weight: bold;
   border-color: rgb(0, 0, 0, 0);
 }
 
 .btn-outline-Eric1:hover {
-  color: #F5F5F5;
-  border-color: #F5F5F5;
+  color: #dda0dd;
+  border-color: #dda0dd;
+  border-radius: 4rem;
   font-weight: bold;
 }
 
@@ -2793,6 +2797,58 @@ fieldset:disabled a.btn {
 .btn-outline-Eric1:not(:disabled):not(.disabled):active:focus, .btn-outline-Eric1:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-Eric1.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-outline-Eric-Black {
+  color: #F5F5F5;
+  font-weight: bold;
+  border-color: rgb(0, 0, 0, 0);
+}
+
+.btn-outline-Eric-Black:hover {
+  color: #F7B733;
+  border-color: #1d2124;
+  background-color: #1d2124;
+  font-weight: bold;
+}
+
+.btn-outline-Eric-Gold {
+  color: #F5F5F5;
+  font-weight: bold;
+  border-color: rgb(0, 0, 0, 0);
+}
+
+.btn-outline-Eric-Gold:hover {
+  color: #1d2124;
+  border-color: #F7B733;
+  background-color: #F7B733;
+  font-weight: bold;
+}
+
+.btn-outline-Eric-Red {
+  color: #F5F5F5;
+  font-weight: bold;
+  border-color: rgb(0, 0, 0, 0);
+}
+
+.btn-outline-Eric-Red:hover {
+  color: #F5F5F5;
+  border-color: #FF533D;
+  background-color: #FF533D;
+  font-weight: bold;
+}
+
+.btn-outline-Eric-White {
+  color: #F5F5F5;
+  font-weight: bold;
+  border-color: rgb(0, 0, 0, 0);
+}
+
+.btn-outline-Eric-White:hover {
+  color: #FF533D;
+  border-color: #F5F5F5;
+  background-color: #F5F5F5;
+  font-weight: bold;
 }
 
 .btn-outline-primary {
@@ -4285,6 +4341,7 @@ input[type="button"].btn-block {
 
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
+  color: #82CAFF;
 }
 
 .navbar-nav {
@@ -4612,7 +4669,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark1 .navbar-brand:hover, .navbar-dark1 .navbar-brand:focus {
-  color: #77C9D4;
+  color: #82CAFF;
   /*#FF533D;*/
   font-weight: bold;
 }
@@ -4666,7 +4723,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
-  color: #77C9D4;
+  color: #dda0dd;
   /*#FF533D;*/
   font-weight: bold;
 }
@@ -5245,8 +5302,33 @@ a.badge-dark:focus, a.badge-dark.focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
+.clip {
+  position: absolute;
+  clip: rect(0, 120px, 80px, 0);
+}
+
+.jumbotron5 {
+  padding: 8% 4rem;
+  background-image: url(https://timedotcom.files.wordpress.com/2015/04/university-maryland.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.jumbotron4 {
+  padding: 20% 4rem;
+  background-image: url(https://timedotcom.files.wordpress.com/2015/04/university-maryland.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
 .jumbotron3 {
-  padding: 10% 4rem;
+  padding: 8% 4rem;
   background-image: url(https://stmed.net/sites/default/files/simple-wallpapers-25302-1663993.jpg);
   background-attachment: fixed;
   background-position: center;
@@ -5254,19 +5336,123 @@ a.badge-dark:focus, a.badge-dark.focus {
   width: 100%;
 }
 
+.jumbotron20 {
+  padding: 5% 2rem;
+  width: 100%;
+  padding-bottom: 5%;
+}
+
 .jumbotron2 {
-  padding: 33.5% 4rem;
-  background-image: url(https://images4.alphacoders.com/740/740137.jpg);
+  padding: 5% 2rem;
+  width: 100%;
+  padding-bottom: 20%;
+}
+
+.jumbotron21 {
+  /*#dda0dd  #ff8c00 */
+  background: url(http://getwallpapers.com/wallpaper/full/7/0/c/1130013-orange-and-purple-backgrounds-1920x1080-phone.jpg);
+  padding: 12% 2rem;
+  width: 100%;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  width: 100%;
+  min-height: 792px;
 }
+
+.jumbo_btn_abme { 
+  background-color: rgba(221, 160, 221, .8); border-radius: 4rem; 
+  padding: 1rem;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  -webkit-transition: background-color 1s, border-color 1s;
+  transition: background-color 1s, border-color 1s;
+}
+
+.jumbo_btn_abme:hover {
+  background-color: rgba(255, 140, 0, .8); border-radius: 4rem;
+  border-color: rgba(255, 140, 0, .8);
+}
+
+.jumbotron_about {
+  background-color: rgba( 245, 154, 68, .6); border-radius: .5rem; margin-right: 15%; margin-left: 15%;
+  position: relative;
+  padding: 5% 2rem;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  width: 5px;
+  height: 100px;
+  -webkit-transition: width 2s, height 4s, color 2s; 
+  -webkit-animation-name: example; 
+  -webkit-animation-duration: 4s; 
+  -webkit-animation-iteration-count: 1; 
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  transition: width 2s, height 4s,  color 2s;
+  color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+}
+
+.jumbotron_about:hover {
+  width: 800px;
+  height: 300px;
+  color: rgb(0, 0, 0);
+  background-color: rgba( 245, 154, 68, .6); border-radius: .5rem;
+  white-space: nowrap;
+  animation-play-state: running;
+}
+
+@keyframes example { 
+  /*0%   {background:red; left:0px; top:0px;}
+  50%   {background:red; left:200px; top:0px;}*/
+  0%   {background:red; left:0px; top:0px;}
+  100% {background:red; left:150px; top:0px;}
+}
+
+.jumbotron_fallback {
+  -webkit-animation-name: fall; 
+  -webkit-animation-duration: 4s; 
+  -webkit-animation-iteration-count: 1; 
+  animation-name: fall;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  animation-play-state: running;
+}
+
+.jumbotron_fallback:hover {
+  white-space: nowrap;
+  animation-play-state: paused;
+}
+
+@keyframes fall { 
+  0%   {background:red; left:150px; top:0px;}
+  100% {background:red; left:0px; top:0px;}
+}
+
 
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
   border-radius: 0.3rem;
+}
+
+html { 
+  background: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/jPLiQ-9/looped-hexagon-hi-tech-background-visual-for-different-projects_nvmtlwlax__F0000.png) no-repeat center center fixed-top; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 @media (min-width: 576px) {
@@ -10213,6 +10399,13 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6;
+  }
+
+
+
+
+  .about_me { 
+    
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
