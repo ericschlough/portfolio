@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="..\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
+
+    <title>Eric Schlough</title>
+    <style>
+		canvas {
+			border: 2px solid #AB987A;
+			border-radius: .4rem;
+			display: block;
+			margin: auto;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+		}
+	</style>
+  </head>
+  <body>
+  	
+  	<nav class="navbar navbar-dark1 bg-dark fixed-top" style="">
+	   	<div class="navbar-header">
+	   		<a class="navbar-brand" href="../Home_Page.html">
+	   			<h3>Eric Schlough</h3>
+	   		</a>
+	   	</div>
+	   	<div class="navbar-header ml-auto">
+	   		<form class="form-inline">
+			   	<a class="btn btn-outline-Eric1 my-2 my-sm-0" href="../about_me.html">
+			   		<h4>About Me</h4>
+			    </a>
+			    <button class="btn btn-outline-Eric1 my-2 my-sm-0" type="submit">
+			    	<h4>Projects</h4>
+			    </button>
+			    <a class="btn btn-outline-Eric1 my-2 my-sm-0" href="../resume_page.html">
+			    	<h4>Resume</h4>
+			    </a>
+			</form>
+		</div>
+	</nav>
+
+	<div class="jumbotron3 text-center" style="margin-bottom:0">
+		<div style="background-color: rgba(128, 5, 23, .4); margin-bottom: 30px; border-radius: .4rem; margin-right: 14%; margin-left: 14%;">
+			<div class="container"> 
+				<h2 class="text-center" style="color:#EBE5D9; font-weight:bold"> Side Projects and Class Projects</h2>
+			</div>	
+		</div>
+ 
+		<div style="background-color: rgba(43, 84, 126, .4); margin-bottom: 0px; border-radius: .4rem; margin-right: 64%; margin-left: 14%;">
+			<div class="container"> 
+				<h4 class="text-left" style="color:#EBE5D9; font-weight:bold"> Automated Snake Game </h4>
+			</div>
+		</div>
+		<div id="buttons">
+			<div class="container" style="margin-top:10px;"> 
+				<div class="row">
+					<div class="container justify-content-center">
+						<button onclick="play()" type="button" class="btn btn-lg btn-outline-Eric1">Play</button>
+						<button onclick="reset()" type="button" class="btn btn-lg btn-outline-Eric2">Reset</button>
+						<button onclick="paused()" type="button" class="btn btn-lg btn-outline-Eric3">Stop</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="one">
+		</div>
+		<script>
+								var
+								//Constats
+								 
+								COLS = 50,
+								ROWS = 30,
+								EMPTY = 0,
+								SNAKE = 1,
+								FRUIT = 2,
+								LEFT  = 0,
+								UP    = 1,
+								RIGHT = 2,
+								DOWN  = 3,
+								KEY_LEFT  = 37,
+								KEY_UP    = 38,
+								KEY_RIGHT = 39,
+								KEY_DOWN  = 40,
+								KEY_SPACE = 32,
+								
+								//Game Vars
+								canvas,  //HTML Canvas
+								ctx,  //Canvas Rendering Context 
+								frames,   //number for animation 
+								score,
+								start_box,
+								keystate,
+								pause,
+								playing,  
+								gameover;
+								
+								//used for block placement
+								grid = {
+									width: null,  /* number, the number of columns */
+									height: null, /* number, the number of rows */
+									board: null,  /* Array<any>, data representation */
+									
+									//fills the grid (0->c && 0->r with d)
+									init: function(d, c, r) {
+										this.width = c;
+										this.height = r;
+										this.board = [];
+										for (var x=0; x < c; x++) {
+											this.board.push([]);
+											for (var y=0; y < r; y++) {
+												this.board[x].push(d);
+											}
+										}
+									},
+
+									//sets value of grid to specified field
+									set: function(val, x, y) {
+										this.board[x][y] = val;
+									},
+									
+									//returns specified value of grid
+									get: function(x, y) {
+										return this.board[x][y];
+									}
+								}
+								
+								//snake is a FIFO queue 
+								snake = {
+									direction: null, 
+									head: null, 
+									list: null, /* Array<number>*/
+									/**
+									* Clears queue and sets position and direction
+									*/
+									init: function(d, x, y) {
+										this.direction = d;
+										this.list = [];
+										this.insert(x, y);
+									},
+									
+									insert: function(x, y) {
+										// unshift prepends an element to an array
+										this.list.unshift({x:x, y:y});
+										this.head = this.list[0];
+									},
+									/**
+									* Removes and returns the first element in the queue.
+									*/
+									remove: function() {
+										return this.list.pop();
+									}
+								};
+
+
+
+								/**
+								 * The fruit moves randomly and based on the snakes current position. it works as a queue (FIFO, first in first out, does not grow in length. queue of length 1 always) of data
+								 * 
+								 */
+								fruits = {
+									direction: null,
+									head: null, 
+									list: null, /* Array<number>*/
+									/**
+									* Clears queue and sets position and direction
+									*/
+									init: function(d, x, y) {
+										this.direction = d;
+										this.list = [];
+										this.insert(x, y);
+									},
+									
+									insert: function(x, y) {
+										// unshift prepends an element to an array
+										this.list.unshift({x:x, y:y});
+										this.head = this.list[0];
+									},
+									remove: function() {
+										return this.list.pop();
+									}
+								};
+
+
+								/**
+								 * place a food id at a random free cell in the grid
+								 */
+								function setFood() {
+									var empty = [];
+									// find all empty cells
+									for (var x=0; x < grid.width; x++) {
+										for (var y=0; y < grid.height; y++) {
+											if (grid.get(x, y) === EMPTY) {
+												empty.push({x:x, y:y});
+											}
+										}
+									}
+									// chooses a random cell
+									var randpos = empty[Math.round(Math.random()*(empty.length - 1))];
+									grid.set(FRUIT, randpos.x, randpos.y);
+									fruits.init(UP, randpos.x, randpos.y);
+								}
+
+
+								//function ran for the play button (doubbles as "unpause")
+								function play() { 
+									if(!pause && !playing || gameover) {
+										main();
+									} else {
+										pause = false;
+									}
+								}
+
+
+								/**
+								 * Starts the game
+								 */
+								function main() {
+
+									playing = true;
+									gameover = false;
+									pause = false;
+									// create and initiate the canvas element
+									canvas = document.createElement("canvas");
+									canvas.width = COLS*20;
+									canvas.height = ROWS*20;
+									ctx = canvas.getContext("2d");
+									// add the canvas element to the body of the document
+									var parent = document.getElementsByClassName("jumbotron3");
+									var place = document.getElementById("buttons");
+									parent[0].insertBefore(canvas, place);
+									// sets an base font for bigger score display
+									ctx.font = "12px Helvetica";
+									frames = 0;
+									keystate = {};
+									// intatiate game objects and starts the game loop
+									// keeps track of the keybourd input
+									init();
+									gameover = false;
+									console.log("HERE");
+
+									document.addEventListener("keydown", function(evt) {
+										keystate[evt.keyCode] = true;
+									});
+
+									document.addEventListener("keyup", function(evt) {
+										delete keystate[evt.keyCode];
+									});
+
+									setTimeout(loop(), 2000);
+								}
+								
+
+								function init() {
+									score = 0;
+									grid.init(EMPTY, COLS, ROWS);
+									var sp = {x:Math.floor(COLS/2), y:ROWS-1};
+									snake.init(UP, sp.x, sp.y);
+									grid.set(SNAKE, sp.x, sp.y);
+									setFood();
+									gameover = true;
+								}
+
+
+								function reset() { 
+									score = 0;
+									grid.init(EMPTY, COLS, ROWS);
+									var sp = {x:Math.floor(COLS/2), y:ROWS-1};
+									snake.init(UP, sp.x, sp.y);
+									grid.set(SNAKE, sp.x, sp.y);
+									setFood();
+								}
+
+
+								function loop() {
+
+									if(keystate[KEY_UP] || keystate[KEY_LEFT] || keystate[KEY_RIGHT] || keystate[KEY_DOWN]) {
+										console.log("HERE LOOP");
+										gameover = false;
+									}
+
+									if(!gameover) {
+										update();
+										draw();
+										// When ready to redraw the canvas call the loop function
+										// first. Runs about 60 frames a second
+										window.requestAnimationFrame(loop, canvas);
+									} 
+									
+								}
+
+
+								//The AI for the snake (no loger user controlled)
+								function chooseDirection() { 
+									var snakeX = snake.head.x;
+									var snakeY = snake.head.y;
+									console.log("Snake \n X: " + snakeX + " Y: " + snakeY);
+
+									var fruitX = fruits.head.x;
+									var fruitY = fruits.head.y;
+									console.log("Fruit \n X: " + fruitX + " Y: " + fruitY);
+
+									var choice;
+
+									//Fruit is below and to the right of the snake (below means snake.y > fruit.y)
+									if(fruitX === snakeX && snakeY === fruitY) {
+										return;
+
+
+									} else if(fruitX >= snakeX && fruitY >= snakeY) {
+										if((fruitX - snakeX) >= (fruitY - snakeY)) {
+											if(snake.direction === LEFT) {
+												choice = KEY_DOWN;
+											} else {
+												choice = KEY_RIGHT;
+											}
+										} else {
+											if(snake.direction === DOWN) {
+												choice = KEY_RIGHT;
+											} else {
+												choice = KEY_DOWN;
+											}
+										}
+
+										//Check to see if the snake's next move will hit itself or a wall
+										if(choice === KEY_RIGHT && (grid.get(snakeX+1, snakeY) === SNAKE || (snakeX+1) >= grid.width) && snake.direction !== DOWN) {
+											choice = KEY_DOWN;
+										} else if(choice === KEY_RIGHT && (grid.get(snakeX+1, snakeY) || (snakeX+1) >= grid.width) && snake.direction === DOWN) {
+											if((snakeY-1) < 0 || grid.get(snakeX, snakeY-1) === SNAKE) {
+												choice = KEY_LEFT;
+											} else {
+												choice = KEY_UP;
+											}
+										} else if(choice === KEY_DOWN && (grid.get(snakeX, snakeY+1) === SNAKE || (snakeY+1) >= grid.height) && snake.direction !== LEFT) {
+											choice = KEY_RIGHT;
+										} else if(choice === KEY_DOWN && (grid.get(snakeX, snakeY+1) === SNAKE || (snakeY+1) >= grid.height) && snake.direction === LEFT) {
+											if((snakeX-1) < 0|| grid.get(snakeX-1, snakeY) === SNAKE) {
+												choice = KEY_UP;
+											} else {
+												choice = KEY_LEFT;
+											}
+										}
+
+									//Fruit is above and to the right of the snake (above means snake.y < fruit.y)
+									} else if(fruitX >= snakeX && fruitY < snakeY) {
+										if((fruitX - snakeX) >= (snakeY - fruitY)) {
+											if(snake.direction === LEFT) {
+												choice = KEY_UP;
+											} else {
+												choice =  KEY_RIGHT;
+											}
+										} else {
+											if(snake.direction === UP) {
+												choice = KEY_RIGHT;
+											} else {
+												choice = KEY_UP;
+											}
+										}
+
+
+										//Check to see if the snake's next move will hit itself or a wall
+										if(choice === KEY_RIGHT && (grid.get(snakeX+1, snakeY)  === SNAKE || (snakeY+1) >= grid.width) && snake.direction !== UP) {
+											choice = KEY_UP;
+										} else if(choice === KEY_RIGHT && (grid.get(snakeX+1, snakeY) === SNAKE || (snakeY+1) >= grid.width) && snake.direction === UP) {
+											if((snakeY+1) >= grid.height || grid.get(snakeX, snakeY+1) === SNAKE) {
+												choice = KEY_LEFT;
+											} else {
+												choice = KEY_DOWN;
+											}
+										} else if(choice === KEY_UP && (grid.get(snakeX, snakeY-1) === SNAKE || (snakeY-1) < 0) && snake.direction !== LEFT) {
+											choice = KEY_RIGHT;
+										} else if(choice === KEY_UP && (grid.get(snakeX, snakeY-1) || (snakeY-1) < 0) && snake.direction === LEFT) {
+											if((snakeX-1) < 0 || grid.get(snakeX-1, snakeY) === SNAKE ) {
+												choice = KEY_DOWN;
+											} else {
+												choice = KEY_LEFT;
+											}
+										}
+
+									//Fruit is above and to the left of the snake (above means snake.y < fruit.y)			
+									} else if(fruitX < snakeX && fruitY < snakeY) {
+										if((snakeX - fruitX) >= (snakeY - fruitY)) {
+											if(snake.direction === RIGHT) {
+												choice = KEY_UP;
+											} else {
+												choice = KEY_LEFT;
+											}
+										} else {
+											if(snake.direction === UP) {
+												choice = KEY_LEFT;
+											} else {
+												choice = KEY_UP;
+											}
+										}
+
+
+										//Check to see if the snake's next move will hit itself or a wall
+										if(choice === KEY_LEFT && (grid.get(snakeX-1, snakeY) === SNAKE || (snakeX-1) < 0) && snake.direction !== UP) {
+											choice = KEY_UP;
+										} else if(choice === KEY_LEFT && (grid.get(snakeX-1, snakeY) === SNAKE || (snakeX-1) < 0) && snake.direction === UP) {
+											if((snakeY+1) >= grid.height || grid.get(snakeX, snakeY+1) === SNAKE) {
+												choice = KEY_RIGHT;
+											} else {
+												choice = KEY_DOWN;
+											}
+										} else if(choice === KEY_UP && (grid.get(snakeX, snakeY-1) === SNAKE || (snakeY-1) < 0) && snake.direction !== RIGHT) {
+											choice = KEY_LEFT;
+										} else if(choice === KEY_UP && (grid.get(snakeX, snakeY-1) === SNAKE || (snakeY-1) < 0) && snake.direction === RIGHT) {
+											if((snakeX+1) >= grid.width || grid.get(snakeX+1, snakeY) === SNAKE) {
+												choice = KEY_DOWN;
+											} else {
+												choice = KEY_RIGHT;
+											}
+										}
+
+									//Fruit is below and to the left of the snake (below means snake.y > fruit.y)	
+									} else if(fruitX < snakeX && fruitY >= snakeY) {
+										if((snakeX - fruitX) >= (fruitY - snakeY)) {
+											if(snake.direction === RIGHT) {
+												choice = KEY_DOWN;
+											} else {
+												choice = KEY_LEFT;
+											}
+										} else {
+											if(snake.direction === DOWN) {
+												choice = KEY_LEFT;
+											} else {
+												choice = KEY_DOWN;
+											}
+										}
+
+
+										//Check to see if the snake's next move will hit itself or a wall
+										if(choice === KEY_LEFT && (grid.get(snakeX-1, snakeY) === SNAKE || (snakeX-1) < 0) && snake.direction !== DOWN) {
+											choice = KEY_DOWN;
+										} else if(choice === KEY_LEFT && (grid.get(snakeX-1, snakeY) === SNAKE || (snakeX-1) < 0) && snake.direction === DOWN) {
+											if((snakeY-1) < 0 || grid.get(snakeX, snakeY-1) === SNAKE) {
+												choice = KEY_RIGHT;
+											} else {
+												choice = KEY_UP;
+											}
+										} else if(choice === KEY_DOWN && (grid.get(snakeX, snakeY+1) === SNAKE || (snakeY+1) >= grid.height) && snake.direction !== RIGHT) {
+											choice = KEY_LEFT;
+										} else if(choice === KEY_DOWN && (grid.get(snakeX, snakeY+1) === SNAKE || (snakeY+1) >= grid.height) && snake.direction === RIGHT) {
+											if((snakeY+1) >= grid.width || grid.get(snakeX+1, snakeY) === SNAKE) {
+												choice = KEY_UP;
+											} else {
+												choice = KEY_RIGHT;
+											}
+										}
+									} 
+
+									return choice;
+								}
+								/**
+								 * Updates the game logic
+								 */
+								function update() {
+									if(!pause) {
+										var randpos = Math.round(Math.random()*(grid.height - 1));
+										frames++;
+
+										var newDir;
+
+										if(keystate[KEY_SPACE]) {
+											
+											paused();
+										}
+
+										// each five frames update the game state.
+										if (frames%8 === 0) {
+
+											newDir = chooseDirection();
+
+											// pop the head element from the snake queue
+											if (newDir === KEY_LEFT) {
+												console.log("Direction = LEFT");
+												snake.direction = LEFT;
+												if(randpos%7 === 0 || randpos%7 === 4) { 
+													fruits.direction = UP;
+												} else if(randpos%7 === 1 || randpos%7 === 5) {
+													fruits.direction = DOWN;
+												} else if(randpos%7 === 2 || randpos%7 === 3) {
+													fruits.direction = LEFT;
+												} else {
+													fruits.direction = RIGHT;
+												}
+									
+											} else if (newDir === KEY_UP) {
+												console.log("Direction = DOWN");
+												snake.direction = DOWN;
+												if(randpos%7 === 0 || randpos%7 === 5) { 
+													fruits.direction = RIGHT;
+												} else if(randpos%7 === 1 || randpos%7 === 4) {
+													fruits.direction = LEFT;
+												} else if(randpos%7 === 2 || randpos%7 === 3) {
+													fruits.direction = DOWN;
+												} else {
+													fruits.direction = UP;
+												}
+												
+											} else if (newDir === KEY_RIGHT) {
+												console.log("Direction = RIGHT");
+												snake.direction = RIGHT;
+												if(randpos%7 === 0 || randpos%7 === 5) { 
+													fruits.direction = UP;
+												} else if(randpos%7 === 1 || randpos%7 === 4) {
+													fruits.direction = DOWN;
+												} else if(randpos%7 === 2 || randpos%7 === 3) {
+													fruits.direction = RIGHT;
+												} else {
+													fruits.direction = LEFT;
+												}
+												
+
+											} else if (newDir === KEY_DOWN) {
+												console.log("Direction = UP");
+												snake.direction = UP;
+												if(randpos%7 === 0 || randpos%7 === 5) { 
+													fruits.direction = RIGHT;
+												} else if(randpos%7 === 1 || randpos%7 === 4) {
+													fruits.direction = UP;
+												} else if(randpos%7 === 2 || randpos%7 === 3) {
+													fruits.direction = LEFT;
+												} else {
+													fruits.direction = DOWN;
+												}
+												
+											}
+
+											var nx = snake.head.x;
+											var ny = snake.head.y;
+
+											// updates the position depending on the snake direction
+											switch (snake.direction) {
+											case LEFT:
+												console.log("We went LEFT");
+												nx--;
+												break;
+											case UP:
+												console.log("We went DOWN (Direction = UP)");
+												ny++;
+												break;
+											case RIGHT:
+												console.log("We went RIGHT");
+												nx++;
+												break;
+											case DOWN:
+												console.log("We went UP (Direction = DOWN)");
+												ny--;
+												break;
+											}
+											console.log("\n");
+
+											
+											// checks all gameover conditions
+											if (0 > nx || nx > grid.width-1  || 0 > ny || ny > grid.height-1 || grid.get(nx, ny) === SNAKE) {
+												gameover = true;
+												return init();
+											}
+											// check wheter the new position are on the fruit item
+											if (grid.get(nx, ny) === FRUIT) {
+												// increment the score and sets a new fruit position
+												score++;
+												setFood();
+											} else {
+												// take out the first item from the snake queue i.e
+												// the tail and remove id from grid
+												var tail = snake.remove();
+												grid.set(EMPTY, tail.x, tail.y);
+											}
+
+											// add a snake id at the new position and append it to 
+											// the snake queue
+											grid.set(SNAKE, nx, ny);
+											snake.insert(nx, ny);
+										} 
+
+										// each 9 frames update the game state.
+										if (frames%22 === 0) {
+
+											// pop the head element from the fruit queue
+											var fx = fruits.head.x;
+											var fy = fruits.head.y;
+
+
+											// updates the position depending on the fruit direction
+											switch (fruits.direction) {
+											case LEFT:
+												fx--;
+												break;
+											case UP:
+												fy--;
+												break;
+											case RIGHT:
+												fx++;
+												break;
+											case DOWN:
+												fy++;
+												break;
+											}
+
+
+											// checks boundry conditions for the fruit
+											if(0 > fx) { 
+												var fruit = fruits.remove();
+												fx = grid.width-1;
+												grid.set(EMPTY, fruit.x, fruit.y);
+
+											} else if(fx > grid.width-1) {
+												var fruit = fruits.remove();
+												fx = 0;
+												grid.set(EMPTY, fruit.x, fruit.y);
+
+											} else if(0 > fy) {
+												var fruit = fruits.remove();
+												fy = grid.height-1;
+												grid.set(EMPTY, fruit.x, fruit.y);
+
+											} else if(fy > grid.height-1) {
+												var fruit = fruits.remove();
+												fy = 0;
+												grid.set(EMPTY, fruit.x, fruit.y);
+
+											} else if (grid.get(fx, fy) === SNAKE) {
+												var fruit = fruits.remove();
+												grid.set(EMPTY, fruit.x, fruit.y);
+												score++;
+												setFood();
+												grid.set(SNAKE, fx, fy);
+												snake.insert(fx, fy);
+												return;
+
+
+											} else {
+												// take out the fruit from the queue and remove it from grid
+												var tail = fruits.remove();
+												grid.set(EMPTY, tail.x, tail.y);
+											}
+
+
+											// add a fruit id at the new position and append it to 
+											// the fruit queue
+											grid.set(FRUIT, fx, fy);
+											fruits.insert(fx, fy);
+
+										}
+
+									}
+								}
+
+								/**
+								 * Render the grid to the canvas.
+								 */
+								function draw() {
+									// calculate tile-width and -height
+									var image = new Image(); 
+									image.src = "https://stmed.net/sites/default/files/simple-wallpapers-25302-1663993.jpg";
+									var tw = canvas.width/grid.width;
+									var th = canvas.height/grid.height;
+									var w=0;
+									var z=0;
+									// iterate through the grid and draw all cells
+									for (var x=0; x < grid.width; x++) {
+
+										for (var y=0; y < grid.height; y++) {
+											// sets the fillstyle depending on the id of
+											// each cell
+											switch (grid.get(x, y)) {
+											case EMPTY:
+												ctx.drawImage(image, (x + 13.1)*(tw+5.25), y*th, tw+5.25, th, x*tw, y*th, tw, th)
+												break;
+											case SNAKE:
+												ctx.fillStyle = "#EBE5D9";
+												ctx.fillRect(x*tw, y*th, tw, th);
+												break;
+											case FRUIT:
+												ctx.fillStyle = "#ff0000";
+												// ctx.arc(x*tw/2, y*th/2, tw/2, 0, 2*Math.PI);
+												// ctx.fill();
+												// ctx.fillStyle = "#fff";
+												ctx.fillRect(x*tw, y*th, tw, th);
+												break;
+											}
+											z++;
+										}
+										w++;
+									}
+									// changes the fillstyle once more and draws the score
+									// message to the canvas
+									ctx.fillStyle = "#0b6623";
+									ctx.fillText("SCORE: " + score, 10, canvas.height-10);
+								}
+
+								function paused() { 
+									if(pause) {
+										pause = false;
+									} else {
+										pause = true;
+									}
+								}
+								// start and run the game
+								//main();
+								play();
+								pause=true;
+		</script>
+
+		<script> 
+			var Twitter = require('twitter');
+			var config = require('./config.js');
+			var T = new Twitter(config);
+			// Set up search parameters
+			var params = {
+			  q: 'america',
+			  count: 1000,
+			  result_type: 'popular',
+			  lang: 'en'
+			}
+			// Initiate search using the above paramaters
+			T.get('search/tweets', params, function search (err, data) { 
+
+			  console.log(data);
+			  
+			  if(!err){
+
+			    for(let i = 0; i < data.statuses.length; i++){
+			      let screen_name = data.statuses[i].user.screen_name;
+			      let text = data.statuses[i].text;
+			      if(screen_name === 'realDonaldTrump'){
+			        document.getElementById("div1").innerHTML = (screen_name);
+			        document.getElementById("div1").innerHTML += (text + "\n");
+			      }
+			    }
+
+			  } else {
+			    console.log(err);
+			  }
+
+			});
+		</script>
+	</div>	
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
