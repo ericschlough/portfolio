@@ -1,0 +1,25 @@
+{
+  "name": "twitter_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "twitter.js",
+  "dependencies": {
+    "server": "^1.0.19",
+    "twitter": "^1.7.1",
+    "twitter-node-client": "^0.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jep"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericschlough/portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericschlough/portfolio/issues"
+  },
+  "homepage": "https://github.com/ericschlough/portfolio#readme"
+}
