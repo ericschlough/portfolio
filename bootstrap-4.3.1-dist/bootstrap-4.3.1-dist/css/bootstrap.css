@@ -5361,7 +5361,95 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .jumbo_btn_abme { 
-  background-color: rgba(221, 160, 221, .8); border-radius: 4rem; 
+  background-color: rgba(221, 160, 221, .8);
+  border: 5px solid transparent;
+  padding: 2px 20px;
+  overflow: hidden;
+  width: 120px;
+  cursor: pointer;
+  color: #F5F5F5;
+  border-radius: 40px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  -webkit-transition: background-color 1s, border-color 1s;
+  transition: 
+    all        1.2s,
+    border     0.5s 1.2s,
+    box-shadow 0.3s 1.5s;
+  white-space: nowrap;
+  font-weight: bold;
+
+
+  span {
+    display: inline-block;
+    transform: translateX(600px);
+    font-weight: normal;
+    opacity: 0;
+    transition: 
+      opacity 0.1s 0.5s,
+      transform 0.4s 0.5s;
+  };
+}
+
+.jumbo_btn_abme:hover {
+  background-color: rgba(255, 140, 0, .8); border-radius: 4rem;
+  border: 10px solid  rgba(221, 160, 221, .8);
+  text-indent: 0;
+  width: 250px;
+  span {
+      transform: translateX(0);
+      opacity: 1;
+    };
+}
+
+.jumbotron_about {
+  background-color: rgba(221, 160, 221, .8);
+  border: 5px solid transparent;
+  padding: 15px 30px;
+  overflow: hidden;
+  width: 200px;
+  cursor: pointer;
+  border-radius: 40px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  -webkit-transition: background-color 1s, border-color 1s;
+  -webkit-animation-name: example; 
+  -webkit-animation-duration: 1.5s; 
+  -webkit-animation-iteration-count: infinite; 
+  -webkit-animation-fill-mode: backwards;
+  animation-name: example;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  transition: background-color 1s, border-color 1s;
+
+ /* color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;*/
+
+  animation-fill-mode: backwards;
+  animation-play-state: paused;
+}
+
+.jumbotron_about:hover {
+  -webkit-animation-fill-mode: backwards;
+  animation-play-state: running;
+  animation-fill-mode: backwards;
+}
+
+@keyframes example { 
+  /*0%   {background:red; left:0px; top:0px;}
+  50%   {background:red; left:200px; top:0px;}*/
+  0%   {background-color:rgba(221, 160, 221, .8); border-color:rgba(221, 160, 221, .8)}
+  50% {background:rgba(255, 140, 0, .8); border-color:rgba(255, 140, 0, .8)}
+  100% {background-color:rgba(221, 160, 221, .8); border-color:rgba(221, 160, 221, .8)}
+}
+
+.jumbotron_about1 {
+  background-color: rgba(221, 160, 221, .8); border-radius: 4rem;
   padding: 1rem;
   cursor: pointer;
   background-repeat: no-repeat;
@@ -5369,75 +5457,49 @@ a.badge-dark:focus, a.badge-dark.focus {
   background-position: center;
   background-size: cover;
   -webkit-transition: background-color 1s, border-color 1s;
-  transition: background-color 1s, border-color 1s;
-}
-
-.jumbo_btn_abme:hover {
-  background-color: rgba(255, 140, 0, .8); border-radius: 4rem;
-  border-color: rgba(255, 140, 0, .8);
-}
-
-.jumbotron_about {
-  background-color: rgba( 245, 154, 68, .6); border-radius: .5rem; margin-right: 15%; margin-left: 15%;
-  position: relative;
-  padding: 5% 2rem;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  width: 5px;
-  height: 100px;
-  -webkit-transition: width 2s, height 4s, color 2s; 
   -webkit-animation-name: example; 
-  -webkit-animation-duration: 4s; 
-  -webkit-animation-iteration-count: 1; 
+  -webkit-animation-duration: 8s; 
+  -webkit-animation-iteration-count: infinite; 
   animation-name: example;
-  animation-duration: 4s;
-  animation-iteration-count: 1;
-  transition: width 2s, height 4s,  color 2s;
-  color: rgba(0, 0, 0, 0);
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  transition: background-color 1s, border-color 1s;
+
+ /* color: rgba(0, 0, 0, 0);
   overflow: hidden;
-  white-space: nowrap;
-  animation-fill-mode: forwards;
-  animation-play-state: paused;
-}
+  white-space: nowrap;*/
 
-.jumbotron_about:hover {
-  width: 800px;
-  height: 300px;
-  color: rgb(0, 0, 0);
-  background-color: rgba( 245, 154, 68, .6); border-radius: .5rem;
-  white-space: nowrap;
+  animation-fill-mode: backwards;
   animation-play-state: running;
-}
-
-@keyframes example { 
-  /*0%   {background:red; left:0px; top:0px;}
-  50%   {background:red; left:200px; top:0px;}*/
-  0%   {background:red; left:0px; top:0px;}
-  100% {background:red; left:150px; top:0px;}
 }
 
 .jumbotron_fallback {
+
   -webkit-animation-name: fall; 
-  -webkit-animation-duration: 4s; 
+  -webkit-animation-duration: 6s; 
   -webkit-animation-iteration-count: 1; 
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-delay: .2s;
+  position: relative;
   animation-name: fall;
-  animation-duration: 4s;
+  animation-duration: 6s;
   animation-iteration-count: 1;
-  overflow: hidden;
-  white-space: nowrap;
   animation-play-state: running;
+  animation-fill-mode: forwards;
+  animation-delay: .2s;
+  animation-timing-function: ease-in-out;
 }
 
-.jumbotron_fallback:hover {
-  white-space: nowrap;
-  animation-play-state: paused;
-}
 
 @keyframes fall { 
-  0%   {background:red; left:150px; top:0px;}
-  100% {background:red; left:0px; top:0px;}
+  0%   {top:-300px;}
+  14%  {top:20px;}
+  28%  {top:-210px;}
+  42%  {top:20px;}
+  58%  {top:-80px;}
+  72%  {top:10px;}
+  86%  {top:-20px;}
+  100% {top:20px;}
 }
 
 

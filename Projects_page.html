@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
+    <link rel="stylesheet" href="..\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
 
     <title>Eric Schlough</title>
     <style>
@@ -26,19 +26,19 @@
   	
   	<nav class="navbar navbar-dark1 bg-dark fixed-top" style="">
 	   	<div class="navbar-header">
-	   		<a class="navbar-brand" href="Home_Page.html">
+	   		<a class="navbar-brand" href="../Home_Page.html">
 	   			<h3>Eric Schlough</h3>
 	   		</a>
 	   	</div>
 	   	<div class="navbar-header ml-auto">
 	   		<form class="form-inline">
-			   	<a class="btn btn-outline-Eric1 my-2 my-sm-0" href="about_me.html">
+			   	<a class="btn btn-outline-Eric1 my-2 my-sm-0" href="../about_me.html">
 			   		<h4>About Me</h4>
 			    </a>
 			    <button class="btn btn-outline-Eric1 my-2 my-sm-0" type="submit">
 			    	<h4>Projects</h4>
 			    </button>
-			    <a class="btn btn-outline-Eric1 my-2 my-sm-0" href="resume_page.html">
+			    <a class="btn btn-outline-Eric1 my-2 my-sm-0" href="../resume_page.html">
 			    	<h4>Resume</h4>
 			    </a>
 			</form>
@@ -67,6 +67,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div id="one">
 		</div>
 		<script>
 								var
@@ -707,8 +709,41 @@
 								play();
 								pause=true;
 		</script>
-	</div>	
 
+		<script> 
+			var Twitter = require('twitter');
+			var config = require('./config.js');
+			var T = new Twitter(config);
+			// Set up search parameters
+			var params = {
+			  q: 'america',
+			  count: 1000,
+			  result_type: 'popular',
+			  lang: 'en'
+			}
+			// Initiate search using the above paramaters
+			T.get('search/tweets', params, function search (err, data) { 
+
+			  console.log(data);
+			  
+			  if(!err){
+
+			    for(let i = 0; i < data.statuses.length; i++){
+			      let screen_name = data.statuses[i].user.screen_name;
+			      let text = data.statuses[i].text;
+			      if(screen_name === 'realDonaldTrump'){
+			        document.getElementById("div1").innerHTML = (screen_name);
+			        document.getElementById("div1").innerHTML += (text + "\n");
+			      }
+			    }
+
+			  } else {
+			    console.log(err);
+			  }
+
+			});
+		</script>
+	</div>	
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
