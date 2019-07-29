@@ -1,7 +1,0 @@
-{
-	"consumerKey" = "7ZVgfKiOvBDcDFpytRWSA"
-	"consumerSecret"="JmeJVeym78arzmGthrDUshQyhkq6nWA9tWLUKxc"
-	"accessToken": "737772535-gMwTkVpg4Z56aBGhHCJEqNbyMrOrolyvHpNrX5QB",
-   	"accessTokenSecret": "ZSh8zRh5nEzwVV9CLHuHIr1Zp6tzsPHKSkHTRUHvD8vBl",
-    	"callBackUrl": "None"
-}

@@ -1,51 +1,65 @@
-const server = require('server');
-
-var error = function (err, response, body) {
-    console.log('ERROR [%s]', err);
-};
-var success = function (data) {
-	console.log('Data [%s]', data);
-};
-
-var Twitter = require('twitter-node-client').Twitter;
-server(ctx => 'Hello');
-
-    var twitter = new Twitter();
-	
-	// //Example calls
-
-	twitter.getUserTimeline({ screen_name: 'BoyCook', count: '10'}, error, success);
-	
-	twitter.getMentionsTimeline({ count: '10'}, error, success);
-	
-	twitter.getHomeTimeline({ count: '10'}, error, success);
-	
-	twitter.getReTweetsOfMe({ count: '10'}, error, success);
-	
-	twitter.getTweet({ id: '1111111111'}, error, success);
-
-	
-	// //
-	// // Get 10 tweets containing the hashtag haiku
-	// //
-
-	// twitter.getSearch({'q':'#haiku','count': 10}, error, success);
-	
-	// //
-	// // Get 10 popular tweets with a positive attitude about a movie that is not scary 
-	// //
-
-	// twitter.getSearch({'q':' movie -scary :) since:2013-12-27', 'count': 10, 'result\_type':'popular'}, error, success);
+//app.js
+var express = require('express');
+var app = express();
+var Twitter = require('twitter');
+var config = require('./config.js');
 
 
-// ConfigurationBuilder cb = new ConfigurationBuilder();
-// cb.setDebugEnabled(false).setOAuthConsumerKey("MNHFspgwe5uYNbjqX96xriMW6");
-// cb.setOAuthConsumerSecret("omlY3j9P5lFzt2ifEo9ceagpDFABt6gkB6DJaf11jMrByXmU40");
-// cb.setOAuthAccessToken("737772535-gMwTkVpg4Z56aBGhHCJEqNbyMrOrolyvHpNrX5QB");
-// cb.setOAuthAccessTokenSecret("ZSh8zRh5nEzwVV9CLHuHIr1Zp6tzsPHKSkHTRUHvD8vBl");
-// TwitterFactory tf = new TwitterFactory(cb.build());
-// Twitter twitter = tf.getInstance();
-// int count = 0, tweetCount = 0;
-// Query query = new Query("Football");
-// query.setLang("en");
-// QueryResult result;
+//////////////////////////EXPRESS SETUP//////////////////////////////////////////
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get('/', function (req, res) {
+    res.sendFile('../Home_Page.html', { root: '.'});
+});
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////////////////////TWITTER CODE////////////////////////////////////////
+app.post('/submit-student-data', function (req, res) {
+  var T = new Twitter(config);
+  var info = '';
+  var name = req.body.firstName + ' ' + req.body.lastName;
+
+  // Set up search parameters
+  var params = {
+    q: name,
+    count: 1,
+    result_type: 'recent',
+    lang: 'en'
+  }
+  // Initiate search using the above paramaters
+  T.get('search/tweets', params, function search (err, data) { 
+
+    //console.log(data);
+    
+    if(!err){
+
+      for(let i = 0; i < data.statuses.length; i++){
+        let screen_name = data.statuses[i].user.screen_name;
+        let text = data.statuses[i].text;
+        
+        info += screen_name;
+        info += text;
+        info += "\n";
+        //console.log(info);
+      }
+
+    } else {
+      console.log(err);
+    }
+    console.log(info);
+    res.send(name + ' Submitted Successfully!' + '<br/>' + 'Here is what was found on Twitter!' + '<br/><br/>' + info);
+
+  });
+})
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////SERVER SETUP/////////////////////////////////////////////
+var server = app.listen(5000, function () {
+    console.log('Node server is running..');
+});
