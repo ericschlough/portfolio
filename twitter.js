@@ -10,16 +10,17 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('src'));
 
-// app.get('/', function (req, res) {
-//     res.sendFile('Home_Page.html', { root: '.'});
-// });
+app.get('/', function (req, res) {
+    res.sendFile('src/Home_Page.html', { root: '.'});
+});
 
 /////////////////////////////////////////////////////////////////////////////////
 
 
 
 /////////////////////////////TWITTER CODE////////////////////////////////////////
-app.post('/submit-student-data', function (req, res) {
+app.post('/twitter', function (req, res) {
+  console.log("HERE From twitter");
   var T = new Twitter(config);
   var info = '';
   var name = req.body.firstName + ' ' + req.body.lastName;
@@ -51,8 +52,8 @@ app.post('/submit-student-data', function (req, res) {
     } else {
       console.log(err);
     }
-    console.log(info);
-    res.send(name + ' Submitted Successfully!' + '<br/>' + 'Here is what was found on Twitter!' + '<br/><br/>' + info);
+    console.log("made it to the send.. ");
+    res.json(info);
 
   });
 })

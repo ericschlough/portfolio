@@ -9,24 +9,32 @@
     <link rel="stylesheet" href="bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
 
     <title>Eric Schlough</title>
+    <style>
+		img {
+		  border-radius: 8px;
+		}
+	</style>
   </head>
   <body>
   	
-		<nav class="navbar navbar-dark bg-dark fixed-top" style="">
+		<nav id= "navb" class="navbar navbar-dark bg-dark fixed-top" style="">
 		   	<div class="navbar-header">
-		   		<a class="navbar-brand" href="#">
-		   			<h3>Eric Schlough</h3>
+		   		<a href="#">
+		   			<h2>
+		   				<span class="navbar-brand">E</span><span class="navbar-brand" style="animation-delay: .5s">r</span><span class="navbar-brand" style="animation-delay: 1s">i</span><span class="navbar-brand" style="animation-delay: 1.5s">c</span>
+		   				<span class="navbar-brand" style="animation-delay: 2s"> S</span><span class="navbar-brand" style="animation-delay:2.5s">c</span><span class="navbar-brand" style="animation-delay: 3s">h</span><span class="navbar-brand" style="animation-delay: 3.5s">l</span><span class="navbar-brand" style="animation-delay: 4s">o</span><span class="navbar-brand" style="animation-delay: 4.5s">u</span><span class="navbar-brand" style="animation-delay: 5s">g</span><span class="navbar-brand" style="animation-delay: 5.5s">h</span>
+		   			</h2>
 		   		</a>
 		   	</div>
 		   	<div class="navbar-header ml-auto">
 		   		<form class="form-inline">
-				   	<a class="btn btn-outline-Eric1 my-2 my-sm-0" href="about_me.html">
+				   	<a class="btn-outline-Eric1" href="about_me.html">
 				   		<h4>About Me</h4>
 				    </a>
-				    <a class="btn btn-outline-Eric1 my-2 my-sm-0" href="Projects_page.html">
+				    <a class="btn-outline-Eric1" href="Projects_page.html">
 				    	<h4>Projects</h4>
 				    </a>
-				    <a class="btn btn-outline-Eric1 my-2 my-sm-0" href="resume_page.html">
+				    <a class="btn-outline-Eric1" href="resume_page.html">
 				    	<h4>Resume</h4>
 				    </a>
 				</form>
@@ -34,23 +42,22 @@
 		</nav>
 
 		<div class="jumbotron21">
-			<div class="jumbotron20  jumbotron_about1">
+			<div class="jumbotron20">
 				<!-- background-color: rgba(76, 120, 126, .4); border-radius: .5rem; -->
-				<div class="text-center jumbotron_fallback">
+				<div class="text-center jumbotron_fallback jumbotron_about1">
 				   	<h1 style="color:#F5F5F5">Eric Schlough</h1>
 				   	<h3 style="color:#F5F5F5">University of Maryland - Computer Engineering<br/></h3>
 			   	</div>
 			   	<div class="text-center" style="margin-top: 5%; margin-left: 10%; margin-right: 10%; text-align: center"> 
-			   		<h3 style="font-weight: bold; color: #F5F5F5;">Page Preview</h3>
 				   	<div calss="text-center" style="margin-top: 1%; margin-left: 10%; margin-right: 10%; text-align: center">
 						<a onclick="myFunction1()" class="btn btn-outline-Eric1 my-2 my-sm-0 jumbo_btn_abme" style="margin-right: 8%; color: #F5F5F5;">
-						   	<span>About Me</span>
+						   	<span style="font-size: 20px">About Me</span>
 						</a>
 						<a onclick="myFunction2()" class="btn btn-outline-Eric1 my-2 my-sm-0 text-center jumbo_btn_abme" style="font-weight: bold; color: #F5F5F5; margin-right: 9%">
-						    <span>Projects</span>
+						    <span style="font-size: 20px">Projects</span>
 						</a>
 						<a class="btn btn-outline-Eric1 my-2 my-sm-0 jumbo_btn_abme" onclick="myFunction3()" style="font-weight: bold; color: #F5F5F5;">
-						    <span>Resume</span>
+						    <span style="font-size: 20px">Resume</span>
 						</a>
 					</div>	
 				</div>
@@ -68,7 +75,7 @@
 		}
 
 		function myFunction2() { 
-			document.getElementById("div1").innerHTML = '<div class="container text-center" style="margin-bottom:10; padding:10px; background-color:rgba(255, 140, 0, .5); border-radius: 2rem"><div style="margin-bottom: 5px; border-radius: .4rem"><div style="width:100%"><div><h2 class="text-center" style="color:#F5F5F5; font-weight:bold; width: 100%"><a href="twitter_application/Projects_page.html"> Current Projects Uploaded </h2><h5 class="text-center" style="color:#F5F5F5; margin-bottom: 30px"> (Click to view the projects page) </h5></a></div>	</div><div class="text-center" style="background-color: rgba(221, 160, 221, .6); margin-bottom: 10px; border-radius: .4rem; margin-right: 35%; margin-left: 35%; text-align: center"><div class="container text-center"> <h4 class="text-center" style="color:#F5F5F5; font-weight:bold padding-bottom:1rem"> Automated Snake Game </h4></div></div><a href="twitter_application/Projects_page.html"><img src="snake_game.jpg" width="30%" height="30%"/></a></div></div>';
+			document.getElementById("div1").innerHTML = '<div class="container text-center" style="margin-bottom:10; padding:10px; background-color:rgba(255, 140, 0, .5); border-radius: 2rem"><div style="margin-bottom: 5px; border-radius: .4rem"><div style="width:100%"><div><h2 class="text-center jumbotron_about1" style="color:#F5F5F5; font-weight:bold; width: 100%"><a href="twitter_application/Projects_page.html"> Current Projects Uploaded </h2></div>	</div><div class="text-center" style="background-color: rgba(221, 160, 221, .3); margin-bottom: 10px; border-radius: .4rem; margin-right: 35%; margin-left: 35%; text-align: center"><div class="container text-center"> <h4 class="text-center" style="color:#F5F5F5; font-weight:bold padding-bottom:2rem"> Automated Snake Game </h4></a></div></div><a href="twitter_application/Projects_page.html"><img src="snake_game.jpg" width="30%" height="30%"/></a></div></div>';
 			console.log("printed");
 			// document.getElementById("div1").innerHTML = '<object type="text/html" data="about_me.html" ></object>';
 		}
@@ -78,6 +85,11 @@
 			console.log("printed");
 			// document.getElementById("div1").innerHTML = '<object type="text/html" data="about_me.html" ></object>';
 		}
+
+		window.onscroll = () => {
+		  const nav = document.querySelector('#navb');
+		  if(this.scrollY <= 10) nav.className = 'navbar navbar-dark bg-dark fixed-top'; else nav.className = 'navbar navbar-dark bg-scroll fixed-top';
+		};
 
 	</script>		
     <!-- Optional JavaScript -->
