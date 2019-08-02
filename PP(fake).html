@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
+    <link rel="stylesheet" href="..\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css">
 
     <title>Eric Schlough</title>
     <style>
 		canvas {
-			border: 2px solid rgba(221, 160, 221, .4);
+			border: 2px solid #AB987A;
 			border-radius: .4rem;
 			display: block;
 			margin: auto;
@@ -24,28 +24,28 @@
   </head>
   <body>
   	
-  	<nav id="navb" class="navbar navbar-dark bg-dark fixed-top" style="">
+  	<nav class="navbar navbar-dark1 bg-dark fixed-top" style="">
 	   	<div class="navbar-header">
-	   		<a class="navbar-brand" href="Home_Page.html">
+	   		<a class="navbar-brand" href="../Home_Page.html">
 	   			<h3>Eric Schlough</h3>
 	   		</a>
 	   	</div>
 	   	<div class="navbar-header ml-auto">
 	   		<form class="form-inline">
-			   	<a class="btn btn-outline-Eric1 my-2 my-sm-0" href="about_me.html">
+			   	<a class="btn btn-outline-Eric1 my-2 my-sm-0" href="../about_me.html">
 			   		<h4>About Me</h4>
 			    </a>
 			    <button class="btn btn-outline-Eric1 my-2 my-sm-0" type="submit">
 			    	<h4>Projects</h4>
 			    </button>
-			    <a class="btn btn-outline-Eric1 my-2 my-sm-0" href="resume_page.html">
+			    <a class="btn btn-outline-Eric1 my-2 my-sm-0" href="../resume_page.html">
 			    	<h4>Resume</h4>
 			    </a>
 			</form>
 		</div>
 	</nav>
 
-	<div class="jumbotron21 text-center" style="margin-bottom:0">
+	<div class="jumbotron3 text-center" style="margin-bottom:0">
 		<div style="background-color: rgba(128, 5, 23, .4); margin-bottom: 30px; border-radius: .4rem; margin-right: 14%; margin-left: 14%;">
 			<div class="container"> 
 				<h2 class="text-center" style="color:#EBE5D9; font-weight:bold"> Side Projects and Class Projects</h2>
@@ -61,21 +61,14 @@
 			<div class="container" style="margin-top:10px;"> 
 				<div class="row">
 					<div class="container justify-content-center">
-						<button onclick="play()" type="button" class="btn btn-lg btn-outline-Eric1 jumbo_btn_abme">Play</button>
-						<button onclick="reset()" type="button" class="btn btn-lg btn-outline-Eric2 jumbo_btn_abme">Reset</button>
-						<button onclick="paused()" type="button" class="btn btn-lg btn-outline-Eric3 jumbo_btn_abme">Stop</button>
+						<button onclick="play()" type="button" class="btn btn-lg btn-outline-Eric1">Play</button>
+						<button onclick="reset()" type="button" class="btn btn-lg btn-outline-Eric2">Reset</button>
+						<button onclick="paused()" type="button" class="btn btn-lg btn-outline-Eric3">Stop</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="one">
-		</div>
-		<div id="two">
-			<label for="fn">First Name</label>
-			<input type="text" name="fn" id="fn">
-			<label for="ln">Last Name</label>
-			<input type="text" name="ln" id="ln">
-			<button id="submit">Submit</button>
 		</div>
 		<script>
 								var
@@ -238,7 +231,7 @@
 									canvas.height = ROWS*20;
 									ctx = canvas.getContext("2d");
 									// add the canvas element to the body of the document
-									var parent = document.getElementsByClassName("jumbotron21");
+									var parent = document.getElementsByClassName("jumbotron3");
 									var place = document.getElementById("buttons");
 									parent[0].insertBefore(canvas, place);
 									// sets an base font for bigger score display
@@ -667,7 +660,7 @@
 								function draw() {
 									// calculate tile-width and -height
 									var image = new Image(); 
-									image.src = "http://getwallpapers.com/wallpaper/full/7/0/c/1130013-orange-and-purple-backgrounds-1920x1080-phone.jpg";
+									image.src = "https://stmed.net/sites/default/files/simple-wallpapers-25302-1663993.jpg";
 									var tw = canvas.width/grid.width;
 									var th = canvas.height/grid.height;
 									var w=0;
@@ -680,14 +673,14 @@
 											// each cell
 											switch (grid.get(x, y)) {
 											case EMPTY:
-												ctx.drawImage(image, (x)*(tw) + 100, y*th + 15, tw*4, th*3, x*tw, y*th, tw, th)
+												ctx.drawImage(image, (x + 13.1)*(tw+5.25), y*th, tw+5.25, th, x*tw, y*th, tw, th)
 												break;
 											case SNAKE:
 												ctx.fillStyle = "#EBE5D9";
 												ctx.fillRect(x*tw, y*th, tw, th);
 												break;
 											case FRUIT:
-												ctx.fillStyle = "rgba(221, 160, 221, .8)";
+												ctx.fillStyle = "#ff0000";
 												// ctx.arc(x*tw/2, y*th/2, tw/2, 0, 2*Math.PI);
 												// ctx.fill();
 												// ctx.fillStyle = "#fff";
@@ -700,7 +693,7 @@
 									}
 									// changes the fillstyle once more and draws the score
 									// message to the canvas
-									ctx.fillStyle = "#EBE5D9";
+									ctx.fillStyle = "#0b6623";
 									ctx.fillText("SCORE: " + score, 10, canvas.height-10);
 								}
 
@@ -716,51 +709,39 @@
 								play();
 								pause=true;
 		</script>
-		<script>
-			const ul = document.getElementById('tweet'); // Get the list where we will place our authors
-  			const url = '../twitter'; 
 
+		<script> 
+			var Twitter = require('twitter');
+			var config = require('./config.js');
+			var T = new Twitter(config);
+			// Set up search parameters
+			var params = {
+			  q: 'america',
+			  count: 1000,
+			  result_type: 'popular',
+			  lang: 'en'
+			}
+			// Initiate search using the above paramaters
+			T.get('search/tweets', params, function search (err, data) { 
 
-			window.onscroll = () => {
-			  const nav = document.querySelector('#navb');
-			  if(this.scrollY <= 10) nav.className = 'navbar navbar-dark bg-dark fixed-top'; else nav.className = 'navbar navbar-dark bg-scroll fixed-top';
-			};
+			  console.log(data);
+			  
+			  if(!err){
 
+			    for(let i = 0; i < data.statuses.length; i++){
+			      let screen_name = data.statuses[i].user.screen_name;
+			      let text = data.statuses[i].text;
+			      if(screen_name === 'realDonaldTrump'){
+			        document.getElementById("div1").innerHTML = (screen_name);
+			        document.getElementById("div1").innerHTML += (text + "\n");
+			      }
+			    }
 
-			const submitBtn = document.querySelector('#submit');
-			submitBtn.addEventListener("click", ()=>{
-				// let fetchData = { 
-				// 	method: 'POST', 
-				// 	body: JSON.stringify(name),
-				// 	// headers: new Headers()
-				// }
-				//console.log(fetchData)
+			  } else {
+			    console.log(err);
+			  }
 
-				var payload = {
-					"firstName": document.getElementById("fn").value,
-					"lastName": document.getElementById("ln").value
-				};
-
-				fetch('/twitter', {
-					method: 'POST',
-					body: JSON.stringify(payload),
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				}).then((res) => {
-					// console.log(JSON.stringify(payload));
-					return res.json();
-
-				}).then((data) => {
-					document.getElementById("two").innerHTML = '<div class="container" style="background-color: rgba(255, 140, 0, .3); border-radius: 2rem; padding: 30px"><div class="row"><div class="col-9"><div><h1 style="color:#F5F5F5">' + data + '<br/></h1><h4 style="font-weight:bold"></h4></div></div></div></div>';
-
-				}).catch(err=>{
-					console.log(err);
-				})
-				// fetch('/twitter').then(function((resp) => resp.json()).then(function(data) {
-				// 	console.log(data);
-				// });
-			})
+			});
 		</script>
 	</div>	
 

@@ -7,27 +7,30 @@ var config = require('./config.js');
 
 //////////////////////////EXPRESS SETUP//////////////////////////////////////////
 var bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(express.static('src'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function (req, res) {
-    res.sendFile('src/Home_Page.html', { root: '.'});
+    res.sendFile('index.html', { root: '.'});
 });
 
+// app.post('/submit-student-data', function (req, res) {
+//     var firstname = req.body.firstName; 
+//     var lastname = req.body.lastName;
+//     res.send('<p id = "first">' + firstname + '</p>' + ' ' + '<p id = "last">'+  lastname + '</p>' + ' Submitted Successfully!' + '<br/>' + 'Here is what was found on Twitter!' + '<br/><br/>');
+// });
 /////////////////////////////////////////////////////////////////////////////////
 
 
 
 /////////////////////////////TWITTER CODE////////////////////////////////////////
-app.post('/twitter', function (req, res) {
-  console.log("HERE From twitter");
+app.post('/submit-student-data', function (req, res) {
   var T = new Twitter(config);
   var info = '';
   var name = req.body.firstName + ' ' + req.body.lastName;
 
   // Set up search parameters
   var params = {
-    q: name,
+    q: 'america',
     count: 1,
     result_type: 'recent',
     lang: 'en'
@@ -52,8 +55,8 @@ app.post('/twitter', function (req, res) {
     } else {
       console.log(err);
     }
-    console.log("made it to the send.. ");
-    res.json(info);
+    console.log(info);
+    res.send(name + ' Submitted Successfully!' + '<br/>' + 'Here is what was found on Twitter!' + '<br/><br/>' + info);
 
   });
 })
