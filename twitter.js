@@ -39,14 +39,17 @@ app.post('/twitter', function (req, res) {
     
     if(!err){
 
-      for(let i = 0; i < data.statuses.length; i++){
+        for (let i = 0; i < data.statuses.length; i++){
+            console.log(data);
         let screen_name = data.statuses[i].user.screen_name;
         let text = data.statuses[i].text;
-        
-        info += screen_name;
+
+          info += "Tweet from: ";
+          info += screen_name;
+          info += " \n";
         info += text;
         info += "\n";
-        //console.log(info);
+        console.log(info);
       }
 
     } else {

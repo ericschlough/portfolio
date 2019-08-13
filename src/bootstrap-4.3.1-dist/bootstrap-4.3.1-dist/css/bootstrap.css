@@ -58,7 +58,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #A9A9A9;
   text-align: left;
   background-image: "https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__340.jpg";
   background-repeat: no-repeat;
@@ -156,15 +156,15 @@ sup {
 
 
 a {
-  color: #F5F5F5;
-  text-decoration: none;
-  background-color: transparent;
-  -webkit-transition: ;
+    color: whitesmoke;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-transition:;
 }
 
-a:hover {
-  color: #dda0dd;
-}
+    a:hover {
+        color: rgba(255, 59, 63, .8);
+    }
 
 
 a:not([href]):not([tabindex]) {
@@ -2380,22 +2380,22 @@ textarea.form-control {
 }
 
 .btn {
-  display: inline-block;
-  font-weight: 400;
-  color: #212529;
-  text-align: center;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    display: inline-block;
+    font-weight: 400;
+    color: #A9A9A9;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2698,9 +2698,9 @@ fieldset:disabled a.btn {
 
 
 .btn-outline-Eric3 {
-  color: #FF533D;
-  font-weight: bold;
-  border-color: rgb(0, 0, 0, 0);
+    color: #A9A9A9;
+    font-weight: bold;
+    border-color: rgb(0, 0, 0, 0);
 }
 
 .btn-outline-Eric3:hover {
@@ -2738,12 +2738,12 @@ fieldset:disabled a.btn {
   border-color: rgb(0, 0, 0, 0);
 }
 
-.btn-outline-Eric2:hover {
-  color: #F5F5F5;
-  border-color: rgba(255, 140, 0, 1);
-  border-radius: 4rem;
-  font-weight: bold;
-}
+    .btn-outline-Eric2:hover {
+        color: #A9A9A9;
+        border-color: rgba(255, 140, 0, 1);
+        border-radius: 4rem;
+        font-weight: bold;
+    }
 
 .btn-outline-Eric2:focus, .btn-outline-Eric2.focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
@@ -2768,46 +2768,48 @@ fieldset:disabled a.btn {
 
 
 .btn-outline-Eric1 {
-  color: #F5F5F5;
-  padding: 1rem;
-  font-weight: bold;
-  border-color: rgb(0, 0, 0, 0);
-  transition: border-color .8s ease-out, color .8s ease-out;
+    color: #A9A9A9;
+    padding: .5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    font-weight: bold;
+    border-color: rgb(0, 0, 0, 0);
+    transition: border-color .8s ease-out, color .8s ease-out;
 }
 
-.btn-outline-Eric1:hover {
-  color: #dda0dd;
-  border-color: #dda0dd;
-  border-radius: 4rem;
-  border-style: solid;
-  font-weight: bold;
-}
+    .btn-outline-Eric1:hover {
+        color: #FF3B3F;
+        border-color: #FF3B3F;
+        border-radius: 2rem;
+        border-style: solid;
+        font-weight: bold;
+    }
 
-.btn-outline-Eric1:focus, .btn-outline-Eric1.focus {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
-}
+    .btn-outline-Eric1:focus, .btn-outline-Eric1.focus {
+        box-shadow: 0 0 0 0.2rem #FF3B3F;
+    }
 
 .btn-outline-Eric1.disabled, .btn-outline-Eric1:disabled {
   color: #007bff;
   background-color: transparent;
 }
 
-.btn-outline-Eric1:not(:disabled):not(.disabled):active, .btn-outline-Eric1:not(:disabled):not(.disabled).active,
-.show > .btn-outline-Eric1.dropdown-toggle {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-}
+    .btn-outline-Eric1:not(:disabled):not(.disabled):active, .btn-outline-Eric1:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-Eric1.dropdown-toggle {
+        color: #fff;
+        background-color: #FF3B3F;
+        border-color: #FF3B3F;
+    }
 
 .btn-outline-Eric1:not(:disabled):not(.disabled):active:focus, .btn-outline-Eric1:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-Eric1.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem #A9A9A9;
 }
 
 .btn-outline-Eric-Black {
-  color: #F5F5F5;
-  font-weight: bold;
-  border-color: rgb(0, 0, 0, 0);
+    color: #A9A9A9;
+    font-weight: bold;
+    border-color: rgb(0, 0, 0, 0);
 }
 
 .btn-outline-Eric-Black:hover {
@@ -2818,9 +2820,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-Eric-Gold {
-  color: #F5F5F5;
-  font-weight: bold;
-  border-color: rgb(0, 0, 0, 0);
+    color: #A9A9A9;
+    font-weight: bold;
+    border-color: rgb(0, 0, 0, 0);
 }
 
 .btn-outline-Eric-Gold:hover {
@@ -2831,38 +2833,38 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-Eric-Red {
-  color: #F5F5F5;
-  font-weight: bold;
-  border-color: rgb(0, 0, 0, 0);
+    color: #A9A9A9;
+    font-weight: bold;
+    border-color: rgb(0, 0, 0, 0);
 }
 
-.btn-outline-Eric-Red:hover {
-  color: #F5F5F5;
-  border-color: #FF533D;
-  background-color: #FF533D;
-  font-weight: bold;
-}
+    .btn-outline-Eric-Red:hover {
+        color: #A9A9A9;
+        border-color: #FF533D;
+        background-color: #FF533D;
+        font-weight: bold;
+    }
 
 .btn-outline-Eric-White {
-  color: #F5F5F5;
-  font-weight: bold;
-  border-color: rgb(0, 0, 0, 0);
+    color: #A9A9A9;
+    font-weight: bold;
+    border-color: rgb(0, 0, 0, 0);
 }
 
 .btn-outline-Eric-White:hover {
   color: #FF533D;
-  border-color: #F5F5F5;
-  background-color: #F5F5F5;
+  border-color: #A9A9A9;
+  background-color: #A9A9A9;
   font-weight: bold;
 }
 
 .btn-outline-primary {
-  color: #F5F5F5;
-  border-color: #F5F5F5;
+  color: #A9A9A9;
+  border-color: #A9A9A9;
 }
 
 .btn-outline-primary:hover {
-  color: #F5F5F5;
+  color: #A9A9A9;
   background-color: #77C9D4;
   border-color: #77C9D4;
 }
@@ -2985,12 +2987,12 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-warning {
-  color: #F5F5F5;
-  border-color: #F5F5F5;
+    color: #A9A9A9;
+    border-color: #A9A9A9;
 }
 
 .btn-outline-warning:hover {
-  color: #F5F5F5;
+  color: #A9A9A9;
   background-color: #F7B733;
   border-color: #F7B733;
 }
@@ -3017,12 +3019,12 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-danger {
-  color: #F5F5F5;
-  border-color: #F5F5F5;
+  color: #A9A9A9;
+  border-color: #A9A9A9;
 }
 
 .btn-outline-danger:hover {
-  color: #F5F5F5;
+  color: #A9A9A9;
   background-color: #FF533D;
   border-color: #FF533D;
 }
@@ -4346,7 +4348,7 @@ input[type="button"].btn-block {
 
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
-  color: #82CAFF;
+  color: #FF3B3F;
 }
 
 .navbar-nav {
@@ -4669,7 +4671,7 @@ input[type="button"].btn-block {
 
 .navbar-dark1 .navbar-brand {
   /*color: #6BBAA7;*/
-  color: #F5F5F5;
+  color: #A9A9A9;
   font-weight: bold;
 }
 
@@ -4726,7 +4728,7 @@ input[type="button"].btn-block {
 
 .navbar-dark .navbar-brand {
   /*color: #6BBAA7;*/
-  color: #F5F5F5;
+  color: #A9A9A9;
   margin: 0px;
   font-weight: bold;
   font-size: 30px;
@@ -4756,9 +4758,9 @@ input[type="button"].btn-block {
 @keyframes highlight { 
   /*0%   {background:red; left:0px; top:0px;}
   50%   {background:red; left:200px; top:0px;}*/
-  0%  {color: #F5F5F5;}
-  50% {color:rgba(221, 160, 221, 1)}
-  100% {color: #F5F5F5;}
+  0%  {color: #A9A9A9;}
+  50% {color:#FF3B3F;}
+  100% {color: #A9A9A9;}
 }
 
 
@@ -5371,9 +5373,22 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .jumbotron20 {
-  padding: 5% 2rem;
-  width: 100%;
-  padding-bottom: 5%;
+    padding: 5% 2rem;
+    width: 100%;
+    padding-bottom: 5%;
+    -webkit-animation-name: fall;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-delay: .2s;
+    position: relative;
+    animation-name: fall;
+    animation-duration: 6s;
+    animation-iteration-count: 1;
+    animation-play-state: running;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
 }
 
 .jumbotron2 {
@@ -5383,40 +5398,35 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .jumbotron21 {
-  /*#dda0dd  #ff8c00 */
-  background: url(http://getwallpapers.com/wallpaper/full/7/0/c/1130013-orange-and-purple-backgrounds-1920x1080-phone.jpg);
-  padding: 12% 2rem;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  min-height: 792px;
+    /*#dda0dd  #ff8c00 */
+    background: #EFEFEF;
+    padding: 12% 2rem;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    min-height: 792px;
 }
 
-.jumbo_btn_abme { 
-  background-color: rgba(221, 160, 221, .8);
-  border: 5px solid transparent;
-  padding: 2px 10px;
-  overflow: hidden;
-  width: 120px;
-  cursor: pointer;
-  color: #F5F5F5;
-  border-radius: 40px;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  -webkit-transition: background-color 1s, border-color 1s;
-  transition: 
-    all        1.2s,
-    border     0.5s 1.2s,
-    box-shadow 0.3s 1.5s;
-  white-space: nowrap;
-  font-weight: bold;
-
-
-  span {
+.jumbo_btn_abme {
+    background-color: rgba(202, 235, 242, 1);
+    border: 5px solid transparent;
+    padding: 2px 10px;
+    overflow: hidden;
+    width: 120px;
+    cursor: pointer;
+    color: #A9A9A9;
+    border-radius: 40px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    -webkit-transition: background-color 1s, border-color 1s;
+    transition: all 1.2s, border 0.5s 1s, box-shadow 0.3s 1s;
+    white-space: nowrap;
+    font-weight: bold;
+    span {
     display: inline-block;
     transform: translateX(600px);
     font-weight: normal;
@@ -5428,11 +5438,12 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .jumbo_btn_abme:hover {
-  background-color: rgba(255, 140, 0, .8); border-radius: 4rem;
-  border: 10px solid  rgba(221, 160, 221, .8);
-  text-indent: 0;
-  width: 250px;
-  span {
+    background-color: rgba(255, 59, 63, .8);
+    border-radius: 4rem;
+    border: 10px solid rgba(202, 235, 242, 1);
+    text-indent: 0;
+    width: 250px;
+    span {
       transform: translateX(0);
       opacity: 1;
     };
@@ -5477,40 +5488,49 @@ a.badge-dark:focus, a.badge-dark.focus {
 @keyframes example { 
   /*0%   {background:red; left:0px; top:0px;}
   50%   {background:red; left:200px; top:0px;}*/
-  0%   {background-color:rgba(221, 160, 221, .4); border-color:rgba(221, 160, 221, .4)}
-  50% {background:rgba(255, 140, 0, .4); border-color:rgba(255, 140, 0, .4)}
-  100% {background-color:rgba(221, 160, 221, .4); border-color:rgba(221, 160, 221, .4)}
+    0% {
+        background-color: rgba(255, 59, 63, .8);
+        border-color: rgba(255, 59, 63, .8)
+    }
+    50% {
+        background: rgba(202, 235, 242, 1);
+        border-color: rgba(202, 235, 242, 1)
+    }
+    100% {
+        background-color: rgba(255, 59, 63, .8);
+        border-color: rgba(255, 59, 63, .8)
+    }
 }
 
 .jumbotron_about1 {
-  background-color: rgba(221, 160, 221, .8); border-radius: 4rem;
-  padding: 1rem;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  -webkit-transition: background-color 1s, border-color 1s;
-  -webkit-animation-name: example; 
-  -webkit-animation-duration: 8s; 
-  -webkit-animation-iteration-count: infinite; 
-  animation-name: example;
-  animation-duration: 8s;
-  animation-iteration-count: infinite;
-  transition: background-color 1s, border-color 1s;
-
- /* color: rgba(0, 0, 0, 0);
+    background-color: rgba(202, 235, 242, 1);
+    border-radius: 4rem;
+    padding: 1rem;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    -webkit-transition: background-color 1s, border-color 1s;
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: example;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    transition: background-color 1s, border-color 1s;
+    color: rgba(255, 59, 63, .8);
+    /* color: rgba(0, 0, 0, 0);
   overflow: hidden;
   white-space: nowrap;*/
-
-  animation-fill-mode: backwards;
-  animation-play-state: running;
+    animation-fill-mode: backwards;
+    animation-play-state: running;
 }
 
 .jumbotron_fallback {
 
   -webkit-animation-name: fall, example; 
-  -webkit-animation-duration: 6s, 8s; 
+  -webkit-animation-duration: 6s, 6s; 
   -webkit-animation-iteration-count: 1, infinite; 
   -webkit-animation-fill-mode: forwards, backwards;
   -webkit-animation-delay: .2s;
@@ -5520,12 +5540,16 @@ a.badge-dark:focus, a.badge-dark.focus {
   animation-iteration-count: 1, infinite;
   animation-play-state: running;
   animation-fill-mode: forwards, backwards;
-  animation-delay: .2s;
   animation-timing-function: ease-in-out;
 }
 
 
-@keyframes fall { 
+@keyframes fall {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+ /*@keyframes fall { 
   0%   {top:-300px;}
   14%  {top:10px;}
   28%  {top:-210px;}
@@ -5534,25 +5558,23 @@ a.badge-dark:focus, a.badge-dark.focus {
   72%  {top:10px;}
   86%  {top:-20px;}
   100% {top:10px;}
-}
+}*/
+    .jumbotron {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 0.3rem;
+    }
 
+    html {
+        background: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/jPLiQ-9/looped-hexagon-hi-tech-background-visual-for-different-projects_nvmtlwlax__F0000.png) no-repeat center center fixed-top;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
-.jumbotron {
-  padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  border-radius: 0.3rem;
-}
-
-html { 
-  background: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/jPLiQ-9/looped-hexagon-hi-tech-background-visual-for-different-projects_nvmtlwlax__F0000.png) no-repeat center center fixed-top; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-@media (min-width: 576px) {
-  .jumbotron {
+    @media (min-width: 576px) {
+        .jumbotron {
     padding: 4rem 2rem;
   }
 }
@@ -7039,13 +7061,13 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color:rgba(0, 0, 0, 0) !important;
-  transition: background-color 0.4s ease-out;
+  background-color:whitesmoke !important;
+  transition: background-color 0.2s ease-out;
 }
 
 .bg-scroll {
-  background-color:rgba(255, 140, 0, .9) !important;
-  transition: background-color 0.4s ease-in;
+    background-color: rgba(239, 239, 239, 1) !important;
+    transition: background-color 0.2s ease-in;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
